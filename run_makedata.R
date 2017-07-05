@@ -1,3 +1,4 @@
+library(mgcv)
 
 # main functions
 source("make_otdata.R")
@@ -24,6 +25,6 @@ rm(sard,ot)
 
 # redeye
 load("raw_data/redeye_rawdata.RData")
-ot <- make_otdata(X_co = sard)
-save(ot, file = "proc_data/sard_nefc.RData")
+ot <- make_otdata(X_co = redeye)
+save(ot, file = "proc_data/redeye_nefc.RData")
 rm(redeye,ot)
