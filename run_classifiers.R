@@ -3,8 +3,13 @@ library(pROC)
 
 source("do_predmodelling.R")
 
+# !!! make sure to select if you want to use NEFCs or PCs as predictors !!!
+usePC <- F
+
 ### anchovy
 load("proc_data/anch_nefc.RData")
+# choose either NEFCs or PCs
+if(usePC == T){ot <- ot$ot_pc}else{ot <- ot$ot_nefc}
 # shuffle rows
 ot <- ot[sample(1:nrow(ot)),]
 # run 100 train/test splits and do predictive modelling on each
@@ -16,6 +21,8 @@ rm(ot)
 
 ### sardine
 load("proc_data/sard_nefc.RData")
+# choose either NEFCs or PCs
+if(usePC == T){ot <- ot$ot_pc}else{ot <- ot$ot_nefc}
 # shuffle rows
 ot <- ot[sample(1:nrow(ot)),]
 # run 100 train/test splits and do predictive modelling on each
@@ -27,6 +34,8 @@ rm(ot)
 
 ### redeye
 load("proc_data/redeye_nefc.RData")
+# choose either NEFCs or PCs
+if(usePC == T){ot <- ot$ot_pc}else{ot <- ot$ot_nefc}
 # shuffle rows
 ot <- ot[sample(1:nrow(ot)),]
 # run 100 train/test splits and do predictive modelling on each
@@ -36,4 +45,7 @@ for(i in 1:100){
 }
 rm(ot)
 
-save(anchres,sardres,redeyeres,file="results/classifier_results.RData")
+# save output
+restype <- ifelse(usePC == T, "pc", "nefc")
+save(anchres,sardres,redeyeres,
+     file=paste("results/classifier_results_",restype,".RData",sep=""))
