@@ -1,5 +1,5 @@
 library(caret)
-library(pROC)
+library(tidyverse)
 
 source("do_predmodelling.R")
 
@@ -12,6 +12,8 @@ load("proc_data/anch_nefc.RData")
 if(usePC == T){ot <- ot$ot_pc}else{ot <- ot$ot_nefc}
 # shuffle rows
 ot <- ot[sample(1:nrow(ot)),]
+# make into a data frame with first col a char vector and rest numeric
+ot <- data.frame(ot, stringsAsFactors = F) %>% mutate_at(-1, as.numeric)
 # run 100 train/test splits and do predictive modelling on each
 anchres = list()
 for(i in 1:100){
@@ -20,11 +22,13 @@ for(i in 1:100){
 rm(ot)
 
 ### sardine
-load("proc_data/sard_nefc.RData")
+load("proc_data/sard_4class_nefc.RData")
 # choose either NEFCs or PCs
 if(usePC == T){ot <- ot$ot_pc}else{ot <- ot$ot_nefc}
 # shuffle rows
 ot <- ot[sample(1:nrow(ot)),]
+# make into a data frame with first col a char vector and rest numeric
+ot <- data.frame(ot, stringsAsFactors = F) %>% mutate_at(-1, as.numeric)
 # run 100 train/test splits and do predictive modelling on each
 sardres = list()
 for(i in 1:100){
@@ -38,6 +42,8 @@ load("proc_data/redeye_nefc.RData")
 if(usePC == T){ot <- ot$ot_pc}else{ot <- ot$ot_nefc}
 # shuffle rows
 ot <- ot[sample(1:nrow(ot)),]
+# make into a data frame with first col a char vector and rest numeric
+ot <- data.frame(ot, stringsAsFactors = F) %>% mutate_at(-1, as.numeric)
 # run 100 train/test splits and do predictive modelling on each
 redeyeres = list()
 for(i in 1:100){

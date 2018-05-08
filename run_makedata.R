@@ -1,4 +1,5 @@
 library(mgcv)
+library(tidyverse)
 
 # main functions
 source("make_otdata.R")
@@ -18,9 +19,9 @@ save(ot, file = "proc_data/anch_nefc.RData")
 rm(anch,ot)
 
 # sardine
-load("raw_data/sard_rawdata.RData")
+load("raw_data/sard_4class_rawdata.RData")
 ot <- make_otdata(X_co = sard)
-save(ot, file = "proc_data/sard_nefc.RData")
+save(ot, file = "proc_data/sard_4class_nefc.RData")
 rm(sard,ot)
 
 # redeye

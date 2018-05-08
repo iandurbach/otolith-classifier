@@ -17,8 +17,8 @@ make_otdata <- function(X_co){
 
     # set up dependent variable
   y <- X$coast_original
-  classes <- c("S","W")
-  y <- factor(y,levels=c(0,1),labels=classes)
+  #classes <- c("S","W")
+  #y <- factor(y,levels=c(0,1),labels=classes)
   
   # set up predictors
   xnefc <- as.data.frame(x_nefc)
@@ -28,6 +28,6 @@ make_otdata <- function(X_co){
   ot_nefc <- cbind(y,x_nefc)
   ot_pc <- cbind(y,x_pc)
   
-  return(list(ot_nefc = ot_nefc, ot_pc = ot_oc))
+  return(list(ot_nefc = ot_nefc, ot_pc = ot_pc))
   
 }

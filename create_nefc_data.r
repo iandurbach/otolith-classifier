@@ -13,7 +13,8 @@ create_nefc_data = function(combined_list){
   otdata[,"length"] <- as.numeric(as.character(otdata[,"length"]))
   
   #defining a binary response variable for coast membership
-  coast <- as.factor(as.numeric(1*(otdata$coast=="West")))
+  # coast <- as.factor(as.numeric(1*(otdata$coast=="West")))
+  coast <- otdata$coast
   
   #creating the predictor matrix of the NEFDs
   
